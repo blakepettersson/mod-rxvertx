@@ -8,48 +8,60 @@ import rx.Observable;
 
 import java.net.InetSocketAddress;
 
-/** Rx wrapper ServerWebSocket 
+/**
+ * Rx wrapper ServerWebSocket
+ *
  * @author <a href="http://github.com/petermd">Peter McDonnell</a>
  */
-public class RxServerWebSocket extends RxWebSocket<RxServerWebSocket>  {
-  
-  /** Nested */
-  private final ServerWebSocket nested;
+public class RxServerWebSocket extends RxWebSocket<RxServerWebSocket> {
 
-  /**Create new RxServerWebSocket */
-  public RxServerWebSocket(ServerWebSocket nested) {
-    super(nested);
-    this.nested=nested;
-  }
-  
-  /** Return as Observable<Buffer> */
-  public Observable<Buffer> asObservable() {
-    return RxSupport.toObservable(this.nested);
-  }
-  
-  // ServerWebSocket implementation
+   /**
+    * Nested
+    */
+   private final ServerWebSocket nested;
 
-  public String path() {
-    return nested.path();
-  }
+   /**
+    * Create new RxServerWebSocket
+    */
+   public RxServerWebSocket(ServerWebSocket nested) {
+      super(nested);
+      this.nested = nested;
+   }
 
-  public String query() {
-    return nested.query();
-  }
+   /**
+    * Return as Observable<Buffer>
+    */
+   public Observable<Buffer> asObservable() {
+      return RxSupport.toObservable(this.nested);
+   }
 
-  public MultiMap headers() {
-    return nested.headers();
-  }
+   // ServerWebSocket implementation
 
-  public ServerWebSocket reject() {
-    return nested.reject();
-  }
+   public String uri() {
+      return nested.uri();
+   }
 
-  public InetSocketAddress remoteAddress() {
-    return nested.remoteAddress();
-  }
+   public String path() {
+      return nested.path();
+   }
 
-  public InetSocketAddress localAddress() {
-    return nested.localAddress();
-  }
+   public String query() {
+      return nested.query();
+   }
+
+   public MultiMap headers() {
+      return nested.headers();
+   }
+
+   public ServerWebSocket reject() {
+      return nested.reject();
+   }
+
+   public InetSocketAddress remoteAddress() {
+      return nested.remoteAddress();
+   }
+
+   public InetSocketAddress localAddress() {
+      return nested.localAddress();
+   }
 }
